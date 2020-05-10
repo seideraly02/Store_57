@@ -1,0 +1,27 @@
+@using System.Collections.Specialized
+@model PhoneCrateViewModels
+
+@{
+    ViewBag.Title = "Добавить смартфон";
+    Layout = "_Layout";
+}
+
+<h2>Добавить новый смартфон</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" asp-controller="Phones" method="post">
+            @{
+                Html.RenderPartial("PartialViews/FormPartial");
+            }
+            <button class="btn btn-primary" type="submit">Добавить</button>
+        </form>
+        
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

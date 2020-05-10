@@ -1,0 +1,47 @@
+@model ReviewsUser
+@{
+    ViewBag.Title = "Отзыв";
+    Layout = "_Layout";
+    
+}
+<h2>Оставить отзыв </h2>
+<div class="row">
+  <form asp-action="Reviews" asp-controller="Phones" method="post">
+    <div class="form-group">
+      <label for="">Смартфон</label>
+      <input class="form-control" type="text" value="@ViewBag.phoneName" disabled>
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Имя</label>
+        <input type="hidden" asp-for="PhoneId" value="@ViewBag.phoneId">
+        <input asp-for="UserName" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name">
+        <span asp-validation-for="UserName"></span>
+        </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Оценка</label>
+        <select asp-for="Estimation" class="form-control" id="exampleFormControlSelect1">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Комментарий</label>
+        <textarea asp-for="Reviews"  class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <span asp-validation-for="Reviews"></span>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Отправить</button>
+  </form>
+</div>
+
+@section Scripts
+{
+  @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+  }
+}

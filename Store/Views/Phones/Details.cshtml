@@ -1,0 +1,119 @@
+@model Phone
+
+@{
+    ViewBag.Title = "Подробнее";
+    Layout = "_Layout";
+    double result;
+}
+<h2>@Model.Name.ToUpper()</h2>
+
+<div class="box-detail" style="margin-top: 20px; width: 85%; float:left;">
+  <div class="block1">
+    <div class="image">
+      <img  class="imgDetails"  src="@Model.UrlPhoto" alt="">
+    </div>
+    <p class="block1-text">Чтобы увеличить, нажмите на картинку</p>
+  </div>
+  <div class="block2">
+    <div class="box-1">
+      <h4 class="block2_box-1_productname">
+        @Model.Name 
+        Lorem ipsum dolor sit amet.
+      </h4>
+      <span>Средняя оценка <b style="background-color:#ffd300 "> @ViewBag.averageMark </b></span>
+    </div>
+    <div class="box-2">
+      <div class="otz">
+        <p>&#9733;&#9733;&#9733;&#9733;&#9733; | <a href="">(@ViewBag.reviewsCount отзыва</a>)</p>
+      </div>
+    </div>
+    <hr>
+    <div class="box-3">
+      <span class="box-3_in1">
+        <p style="font-size: 15px; color: silver; margin:0;">Цена</p>
+        <span class="box-3_in1_price" style="font-weight: bold;"> @Model.Price USD</span>
+      </span>
+      <div class="box-3_in2">
+        <p style="font-size: 15px; color: silver; margin:0;">В кредит</p>
+        <p class="box-3_in1_price">
+          <span class="span-price"> @ViewData["price12"] </span>
+          <span style="color: silver; font-size: 15px;"> x 12 мес</span>
+        </p>
+      </div>
+      <div class="box-3_in3">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a type="submit" class="btn btn-secondary" asp-action="Create" asp-controller="Orders" asp-route-phoneId="@Model.Id">Заказать</a>
+          <a type="submit" class="btn btn-secondary" asp-action="Edit" asp-controller="Phones" asp-route-phoneId="@Model.Id">Редактировать</a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="box-4">
+      <div class="item__description-text">
+        - найменование : @Model.Name;<br>
+        - бренд : @Model.Brand.Name<br>
+        - описание : @Model.Descriptions 
+      </div>
+    </div>
+    <div class="remove-product">
+      <a asp-action="Delete" 
+         asp-controller="Phones" asp-route-id="@Model.Id">Удалить продукт</a>
+    </div>
+  </div>
+</div>
+<div class="block3" >
+  <h5>Курсы валют</h5>
+  @foreach (var currency in ViewBag.currency)
+  {
+    <p style="margin-bottom: 0;"> @currency.CurrencyName = @currency.CurrencyRate</p>
+  }
+  <hr>
+  <h5>Стоймость продукта</h5>
+  @foreach (var currency in ViewBag.currency)
+  {
+    <p style="margin-bottom: 0;">
+      @{
+        result = Model.Price * currency.CurrencyRate; 
+      }
+      <span class="span-price">@result</span> @currency.CurrencyCode 
+    </p>
+  }
+</div>
+
+<br>
+
+<div style="padding-top: 550px">
+  @if (ViewBag.reviewsUser != null)
+  {
+    <ul class="list-unstyled">
+      @foreach (ReviewsUser user in ViewBag.reviewsUser)
+      {
+        <hr>
+        <li class="media">
+          <img  src="https://img2.freepng.ru/20180331/iuw/kisspng-user-profile-computer-software-internet-bot-user-5abf1fc8f2c2a6.7377880715224749529944.jpg" class="mr-3" alt="..." style="width: 50px;">
+          <div class="media-body">
+            <h5 class="mt-0 mb-1"><b>@user.UserName</b></h5> 
+            @if (user.Estimation > 0)
+            {
+              @for (int i = 0; i < user.Estimation; i++)
+              {
+                <span style="color: #ffd300">&#9733;</span>
+              }
+            }
+            else
+            {
+              <span>&#9733;</span>
+            }
+            <br>
+            <span style="background: silver">@user.Reviews</span> 
+            <br>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque 
+            ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra 
+            turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue 
+            felis in faucibus.
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</div>

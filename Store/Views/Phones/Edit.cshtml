@@ -1,0 +1,27 @@
+@model PhoneCrateViewModels
+
+@{
+    ViewBag.Title = "Редактирвать";
+    Layout = "_Layout";
+}
+
+<h2>Редактировать смартфон</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" asp-controller="Phones" method="post">
+            <input type="hidden" asp-for="@Model.Phone.Id" value="@Model.Phone.Id">
+            @{
+                Html.RenderPartial("PartialViews/FormPartial");
+            }
+            <button class="btn btn-primary" type="submit">Редактировать </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

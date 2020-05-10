@@ -1,0 +1,31 @@
+<table class="table">
+    <tbody>
+    <tr>
+        <th>ID</th>
+        <th>Бренд</th>
+        <th>Email</th>
+        <th>Дата основания</th>
+        <th>Действе</th>
+    </tr>
+    @foreach (Brand brand in ViewBag.brands)
+    {
+        <tr>
+
+            <th>@brand.Id</th>
+            <td>
+                @brand.Name"
+            </td>
+            <td>
+                @brand.Email
+            </td>
+            <td>
+                @brand.DateFoundation.ToShortDateString()
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Brands" asp-route-id="@brand.Id">Изменить</a>
+                <a asp-action="Remove" asp-controller="Brands" asp-route-id="@brand.Id">Удалить</a>
+            </td>
+        </tr>
+    }
+</table>
+

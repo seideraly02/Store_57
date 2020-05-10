@@ -1,0 +1,37 @@
+@model PhoneCrateViewModels
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for=""> Название </label>
+            <input class="form-control" asp-for="Phone.Name" value="@Model.Phone.Name" type="text">
+            <span asp-validation-for="Phone.Name"></span>
+        </div>
+        <div class="form-group">
+            <label for="">Бренды</label>
+            <select class="form-control" asp-for="Phone.BrandId" id="">
+                @foreach (Brand brand in Model.Brands)
+                {
+                    <option value="@brand.Id">@brand.Name</option>
+                }
+                
+            </select>
+            <span asp-validation-for="Phone.BrandId"></span>
+        </div>
+        <div class="form-group">
+            <label for=""> Стоймость</label>
+            <input class="form-control" asp-for="Phone.Price" value="@Model.Phone.Price" type="text">
+            <span asp-validation-for="Phone.Price"></span>
+        </div>
+        <div class="form-group">
+            <label for="">Ссылка </label>
+            <input class="form-control" asp-for="Phone.UrlPhoto" value="@Model.Phone.UrlPhoto" type="url">
+            <span asp-validation-for="Phone.UrlPhoto"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Описание товара</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" asp-for="Phone.Descriptions"></textarea>
+            <span asp-validation-for="Phone.Descriptions"></span>
+        </div>
+    </div>
+</div>

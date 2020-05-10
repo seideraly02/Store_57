@@ -1,0 +1,12 @@
+[
+  {
+    "CurrencyCode":"RUB",
+    "CurrencyName":"Рубль",
+    "CurrencyRate":69
+},
+  {
+    "CurrencyCode":"KZT",
+  "CurrencyName":"Тенге",
+    "CurrencyRate":431
+}
+]

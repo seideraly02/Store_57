@@ -1,0 +1,52 @@
+@model Brand
+
+@{
+    ViewBag.Title = "Добавить бренд";
+    Layout = "_Layout";
+}
+
+<div>
+    <h2 style="float: left">Список брендов </h2>
+    <h2 style="padding-left: 75%">Добавить бренд</h2>
+</div>
+
+<div class="form-brand">
+    @if (ViewBag.brands == null) 
+    {
+        <p>Список пуст</p>
+    }
+    else
+    {
+        Html.RenderPartial("PartialView/FormPartialBrand");
+    }
+</div>
+
+<div class="form-rows">
+    <form asp-action="Create" asp-controller="Brands" method="post">
+        <div class="form-group">
+            <label for="brandName">Наименование бренда </label>
+            <input id="brandName" type="text" asp-for="Name"  class="form-control">
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <label for="brandEmail">Email</label>
+            <input id="brandEmail" type="text" asp-for="Email" class="form-control">
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label for="brandDate">Дата основания</label>
+            <input id="brandDate" type="date" asp-for="DateFoundation" class="form-control">
+            <span asp-validation-for="DateFoundation"></span>
+        </div>
+        <div style="text-align: end">
+            <button class="btn btn-primary" type="submit">Добавить</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
